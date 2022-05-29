@@ -70,7 +70,7 @@ class Parroquia(Base):
 class Establecimiento(Base):
     __tablename__ = 'establecimiento'
     codigo_AMIE = Column(String, primary_key=True)  
-    nombre = Column(String(100), nullable=False) 
+    nombre_e = Column(String(100), nullable=False) 
     sostenimiento = Column(String(50), nullable=False) 
     tipo_educacion = Column(String(100), nullable=False) 
     modalidad = Column(String(500), nullable=False) 

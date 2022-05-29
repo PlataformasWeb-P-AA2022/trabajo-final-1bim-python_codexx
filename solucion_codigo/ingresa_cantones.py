@@ -16,7 +16,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 #Lectura del archivo
-with open('../data/Listado-Instituciones-Educativas.csv', encoding='UTF8') as File:
+with open('data/Listado-Instituciones-Educativas.csv', encoding='UTF8') as File:
     reader = csv.reader(File,delimiter='|', quotechar=',',
                         quoting=csv.QUOTE_MINIMAL)
 
@@ -42,3 +42,19 @@ with open('../data/Listado-Instituciones-Educativas.csv', encoding='UTF8') as Fi
             session.add(can)
 #commit de transacciones
 session.commit()
+# 0 = Codigo AMIE
+# 1 = Nombre de la Institucion Educativa
+# 2 = Codigo de division politica administrativa (Provincia)
+# 3 = Provincia
+# 4 = Codigo de division politica administrativa (Canton)
+# 5 = Canton
+# 6 = Codigo de division politica administrativa (Parroquia)
+# 7 = Parroquia
+# 8 = Codigo de Distrito
+# 9 = Sostenimieto
+# 10 = Tipo de Educacion
+# 11 = Modalidad
+# 12 = Jornada
+# 13 = Acceso
+# 14 = Numero de estudiantes
+# 15 = Numero de Docentes
