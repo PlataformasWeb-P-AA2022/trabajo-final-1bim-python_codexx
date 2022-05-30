@@ -35,7 +35,7 @@ with open('data/Listado-Instituciones-Educativas.csv', encoding='UTF8') as File:
             id_c= session.query(Canton).filter_by(nombre = row[5]).first()
 
             # Creación del objeto de tipo Parroquia
-            par = Parroquia(nombre=row[7], cod_division_politica=row[6],canton_id=id_c)
+            par = Parroquia(nombre=row[7], cod_division_politica=row[6],canton_id=id_c.id)
            
             # Agregar los objetos de provincia mediante la sesion 
             session.add(par)
