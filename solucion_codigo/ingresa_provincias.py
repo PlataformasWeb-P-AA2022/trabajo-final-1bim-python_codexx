@@ -30,7 +30,7 @@ with open('data/Listado-Instituciones-Educativas.csv', encoding='UTF8') as File:
             # Se agregan las provincias
             provincias.append(i[3])
             # Creación del objeto de tipo Provincia
-            prov= Provincia(nombre=i[3], cod_division_politica=i[2]) 
+            prov= Provincia(nombre=i[3], cod_division_politica=i[2], codigo_distrito=i[8]) 
             # Agregar los objetos de provincia mediante la sesion 
             session.add(prov)
 # commit de transacciones

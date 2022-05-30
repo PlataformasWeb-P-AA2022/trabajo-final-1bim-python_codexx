@@ -1,7 +1,7 @@
 #conectar a la base de datos
 #
 # Sqlite
-# cadena_base_datos = 'sqlite:///final1bimaa22.db' 
+cadena_base_datos = 'sqlite:///final1bimaa22.db' 
 
 #conectar a la base de datos
 # pip install PyMySQL
@@ -23,4 +23,4 @@
 # except Exception as ex:
 #     print(ex)
 
-cadena_base_datos = 'mysql+mysqlconnector://finalBim:bimestral@localhost/final1bimaa22'
+# cadena_base_datos = 'mysql+mysqlconnector://finalBim:bimestral@localhost/final1bimaa22'

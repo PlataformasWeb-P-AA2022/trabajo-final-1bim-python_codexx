@@ -18,21 +18,21 @@ session = Session()
 
 
 # Consulta 1
-# Los establecimientos ordenados por número de estudiantes; que tengan más de 100 profesores.
-print("\033[0;m"+"Los establecimientos ordenados por número de estudiantes; que tengan más de 100 profesores."+'\033[0;m') 
+# Los establecimientos ordenados por nombre de parroquia que tengan más de 40 profesores y la cadena "Educación regular" en tipo de educación.
+print('Consulta 1 - Los establecimientos ordenados por nombre de parroquia que tengan más de 40 profesores y la cadena "Educación regular" en tipo de educación.') 
 
-est_Nd_Oe = session.query(Establecimiento).filter(Establecimiento.num_docentes > 100).order_by(Establecimiento.num_estudiantes).all()
-for nd_Oe in est_Nd_Oe:
-    print(nd_Oe)
+consulta1 = session.query(Establecimiento).filter(and_(Establecimiento.num_docentes > 40, Establecimiento.tipo_educacion == "Educacion Regular")).order_by(Parroquia.nombre).all()
+for x in consulta1:
+    print(x)
     print("---------------------------------------------------------------------------------------------")
-print(len(est_Nd_Oe))
+print(len(consulta1))
 
-# Consulta 1
-# Los establecimientos ordenados por número de profesores; que tengan más de 100 profesores.
-print("\033[0;m"+"Los establecimientos ordenados por número de profesores; que tengan más de 100 profesores."+'\033[0;m') 
+# Consulta 2
+#Todos los establecimientos ordenados por sostenimiento y tengan código de distrito 11D04.
+print("Consulta 2 - Todos los establecimientos ordenados por sostenimiento y tengan código de distrito 11D04.") 
 
-est_Nd_Od = session.query(Establecimiento).filter(Establecimiento.num_docentes > 100).order_by(Establecimiento.num_docentes).all()
-for nd_Od in est_Nd_Od:
-    print(nd_Od)
+consulta2 = session.query(Establecimiento).join(Provincia).filter(Provincia.codigo_distrito == "11D04").order_by(Establecimiento.sostenimiento).all()
+for x in consulta2:
+    print(x)
     print("---------------------------------------------------------------------------------------------")
-print(len(est_Nd_Oe))
+print(len(consulta2))
