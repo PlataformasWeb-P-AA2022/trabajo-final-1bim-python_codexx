@@ -1,3 +1,4 @@
+from itertools import count
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import and_ 
@@ -55,10 +56,12 @@ session = Session()
 
 
 
-establecimientos4 = session.query(Establecimiento, Canton).filter(Canton.nombre == "Zamora").join().all() 
+establecimientos4 = session.query(Establecimiento, Parroquia, Canton).join(Establecimiento).\
+    filter(Canton.nombre == "Zamora").all() 
 
-cont = 1
 print("----------------Consulta 4----------------------")
+count = 1
+
 for s in establecimientos4:
     print("______________________________________________")
     print("| Id: %s | Nombre: %s | Canton: %s |" % (cont ,s.Establecimiento.nombre_e, s.Canton.nombre))
