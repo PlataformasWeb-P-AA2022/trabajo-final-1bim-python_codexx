@@ -63,7 +63,3 @@ for r in establecimiento:
     salida = "| Nombre Establecimiento: %s |" %(str(r).replace("('",""))
     salida = salida.replace("',)", "")
     print(salida)
-
-
-
-

@@ -43,4 +43,3 @@ count2 = 1
 for s in datos2_2:
     print("______________________________________________________________________________________")
     print("| Id: %s | Nombre: %s | Canton: %s | Estudiantes: %s |" % (count2, s.Establecimiento.nombre_e, s.Canton.nombre, s.Establecimiento.num_estudiantes))
-    count2 = count2 + 1
