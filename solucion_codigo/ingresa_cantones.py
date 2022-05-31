@@ -19,22 +19,14 @@ session = Session()
 with open('data/Listado-Instituciones-Educativas.csv', encoding='UTF8') as File:
     reader = csv.reader(File,delimiter='|', quotechar=',',
                         quoting=csv.QUOTE_MINIMAL)
-
-    # No tomar en cuenta la primera fila del csv
     next(reader)
-
     # Lista donde se guardan los cantones (vacia)
     cantones=[]
-
     # Ciclo repetitivo sobre el archivo csv para poder llenar las entidades 
     for row in reader:
-        # Condicional para evitar que se guarden valores repetidos
         if row[4] not in cantones:
-            # Agrega los cantones la lista cantones
             cantones.append(row[4])
-            # Variable para guardar la provincia de la consulta para obtener el id y agregarlo al canton
             id_p= session.query(Provincia).filter_by(cod_division_politica = row[2]).first()  
-            # Creación del objeto de tipo Canton
             can = Canton(nombre=row[5], cod_division_politica=row[4], provincia_id=id_p.id, codigo_distrito=row[8])
 
             #Agregar el objeto Canton mediante la sesion

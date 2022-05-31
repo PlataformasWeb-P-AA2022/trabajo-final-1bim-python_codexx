@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.sql.schema import UniqueConstraint
 
-# se importa información del archivo configuracion
+# se importa los archivos y metodos necesarios.
 from configuracion import cadena_base_datos
 
 # se genera en enlace al gestor de base de datos
