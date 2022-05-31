@@ -28,12 +28,11 @@ with open('data/Listado-Instituciones-Educativas.csv', encoding='UTF8') as File:
     # Ciclo repetitivo sobre el archivo csv para poder llenar las entidades 
     for row in reader:
           # Condicional para evitar que se guarden valores repetidos
-        if row[7] not in parroquia:
+        if row[6] not in parroquia:
             # Agrega las parroquias a la lista parroquia
-            parroquia.append(row[7]) 
+            parroquia.append(row[6]) 
             # Variable para guardar el canton de la consulta para obtener el id y agregarlo a la parroquia
-            id_c= session.query(Canton).filter_by(nombre = row[5]).first()
-
+            id_c= session.query(Canton).filter_by(cod_division_politica = row[4]).first()
             # Creación del objeto de tipo Parroquia
             par = Parroquia(nombre=row[7], cod_division_politica=row[6],canton_id=id_c.id)
            

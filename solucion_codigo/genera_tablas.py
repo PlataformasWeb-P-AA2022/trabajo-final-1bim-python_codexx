@@ -23,15 +23,12 @@ class Provincia(Base):
     nombre = Column(String(100), unique=True)
     #Código División Política Administrativa Provincia
     cod_division_politica = Column(String(50),unique=True)
-    #Código de Distrito
-    codigo_distrito = Column(String(50),nullable=False) 
     cantones = relationship("Canton", back_populates="provincia")
     
     def __repr__(self):
         return "Provincia: %s | Código de División Política: %s \n "% (
                           self.nombre,
-                          self.cod_division_politica,
-                          self.codigo_distrito)
+                          self.cod_division_politica)
 
 # Creación de la tabla Canton
 # Relacion: un canton tiene muchas parroquias
@@ -42,13 +39,16 @@ class Canton(Base):
     nombre = Column(String(100), unique=True)
     cod_division_politica = Column(String(50),nullable=False)#Código División Política Administrativa  Cantón
     provincia_id = Column(Integer, ForeignKey('provincia.id'))
+    #Código de Distrito
+    codigo_distrito = Column(String(50),nullable=False) 
     provincia = relationship("Provincia", back_populates="cantones")
     parroquias = relationship("Parroquia", back_populates="canton")
     def __repr__(self):
-        return "Canton: %s |  Código de División Política: %s | Id de provincia: %d\n"% (
+        return "Canton: %s |  Código de División Política: %s | Id de provincia: %d | Codigo del Distrito: %s\n"% (
                           self.nombre, 
-                          self.provincia,
-                          self.provincia_id)
+                          self.cod_division_politica,
+                          self.provincia_id,
+                          self.codigo_distrito)
 
 # Creación de la tabla parroquia 
 # Relacion: una parroquia tiene varios establecimientos
@@ -56,13 +56,13 @@ class Canton(Base):
 class Parroquia(Base):
     __tablename__ = 'parroquia'
     id = Column(Integer, primary_key=True)
-    nombre = Column(String(100),unique=True)
+    nombre = Column(String(100))
     cod_division_politica = Column(String(50),nullable=False)#Código División Política Administrativa  Parroquia
     canton_id = Column(Integer, ForeignKey('canton.id'))
     canton = relationship("Canton", back_populates="parroquias")
     establecimientos= relationship("Establecimiento", back_populates="parroquias")
     def __repr__(self):
-        return "Parroquia: %s |  Código de División Política: %s |  Código de Distrito: %s | Id Canton: %d\n"% (
+        return "Parroquia: %s |  Código de División Política: %s  | Id Canton: %d\n"% (
                           self.nombre, 
                           self.cod_division_politica,
                           self.canton_id)
@@ -70,7 +70,7 @@ class Parroquia(Base):
 # Creación de la tabla Establecimiento
 class Establecimiento(Base):
     __tablename__ = 'establecimiento'
-    codigo_AMIE = Column(String, primary_key=True)  
+    codigo_AMIE = Column(String(50), primary_key=True)  
     nombre_e = Column(String(100), nullable=False) 
     sostenimiento = Column(String(50), nullable=False) 
     tipo_educacion = Column(String(100), nullable=False) 

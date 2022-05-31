@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import and_, _or
+from sqlalchemy import and_
 
 from genera_tablas import Provincia, Canton, Establecimiento, Parroquia
 
@@ -13,22 +13,34 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-# Consulta 1
+print("===============Consulta 1==============")
 # Los establecimientos ordenados por nombre de parroquia que tengan más de 40 profesores y la cadena "Educación regular" en tipo de educación.
 print("\033[0;m"+"Los establecimientos ordenados por nombre de parroquia que tengan más de 40 profesores y la cadena 'Educación regular' en tipo de educación."+'\033[0;m') 
 
-consulta1 = session.query(Establecimiento.nombre_e).join(Parroquia).filter(and_(Establecimiento.num_docentes > 40,
-                    Establecimiento.tipo_educacion.like("%Educación regular%"))).order_by(Parroquia.nombre).all()
-for i in consulta1:
-    print("Nombre de Establecimiento: %s" % (i))
-print(len(consulta1))
+consulta40 = session.query(Establecimiento.nombre_e, Parroquia.nombre).join(Parroquia).filter(
+    and_(Establecimiento.num_docentes > 40, Establecimiento.tipo_educacion.like(
+        'Educación regular'))).order_by(Parroquia.nombre).all()
+
+for i in consulta40:
+    print("------------------------------------------------")
+    salida = " | Nombre:| %s | Parroquia: %s |" %(str(i[0]).replace("('",""), str(i[1]).replace(")'",""))
+    salida = salida.replace("',)", "")
+    salida = salida.replace("'", "")
+    salida = salida.replace(")", "")
+    print(salida)
 
 
-# # Consulta 1
-# # Todos los establecimientos ordenados por sostenimiento y tengan código de distrito 11D04.
+
+print("===============Consulta 1==============")
+# # # Todos los establecimientos ordenados por sostenimiento y tengan código de distrito 11D04.
 print("\033[0;m"+"Todos los establecimientos ordenados por sostenimiento y tengan código de distrito 11D04"+'\033[0;m') 
 
-consulta1 = session.query(Establecimiento).join(Provincia).filter(Provincia.codigo_distrito == '11D04').order_by(Establecimiento.sostenimiento).all()
-for i in consulta1:
-    print(i)
-print(len(consulta1))
+consulta11D04 = session.query(Establecimiento.nombre_e, Establecimiento.sostenimiento).join(Parroquia, Canton).filter(Canton.codigo_distrito.like('11D04')).order_by(Establecimiento.sostenimiento)
+
+for i in consulta11D04:
+    print("------------------------------------------------")
+    salida = " | Nombre: %s | Sostenimiento: %s |" %(str(i[0]).replace("('",""), str(i[1]).replace(")'",""))
+    salida = salida.replace("',)", "")
+    print(salida)
+    
+
